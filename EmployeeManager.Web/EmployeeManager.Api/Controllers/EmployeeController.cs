@@ -1,8 +1,6 @@
-﻿using EmployeeManager.Api.Models;
-using EmployeeManager.Domain;
+﻿using EmployeeManager.Shared.Orchestrators;
+using EmployeeManager.Shared.ViewModels;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -11,29 +9,16 @@ namespace EmployeeManager.Api.Controllers
     [Route("api/v1/employees")]
     public class EmployeeController : ApiController
     {
-        private EmployeeContext _employeeContext;
+        private EmployeeOrchestrator _employeeOrchestrator;
 
         public EmployeeController()
         {
-            _employeeContext = new EmployeeContext();
+            _employeeOrchestrator = new EmployeeOrchestrator();
         }
 
-        public async Task<ICollection<EmployeeModel>> GetAllEmployees()
+        public async Task<List<EmployeeViewModel>> GetAllEmployees()
         {
-            var employees = await _employeeContext.Employees.Select(x => new EmployeeModel
-            {
-                EmployeeId = x.EmployeeId,
-                FirstName = x.FirstName,
-                MiddleName = x.MiddleName,
-                LastName = x.LastName,
-                BirthDate = x.BirthDate,
-                HireDate = x.HireDate,
-                Department = x.Department,
-                JobTitle = x.JobTitle,
-                Salary = x.Salary,
-                SalaryType = x.SalaryType,
-                AvailableHours = x.AvailableHours
-            }).ToListAsync();
+            var employees = await _employeeOrchestrator.GetAllEmployees();
 
             return employees;
         }

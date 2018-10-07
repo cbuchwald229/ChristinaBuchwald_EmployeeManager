@@ -115,6 +115,10 @@
       <Project>{51D789E5-AF05-466D-9B99-C667605F5536}</Project>
       <Name>EmployeeManager.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EmployeeManager.Shared\EmployeeManager.Shared.csproj">
+      <Project>{C691E418-4A1C-47D5-95DB-1EA2A3CD67DD}</Project>
+      <Name>EmployeeManager.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
