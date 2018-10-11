@@ -6,23 +6,257 @@
     <head>
         <meta name="viewport" content="width=device-width" />
         <title>Create</title>
+        <style>
+
+            .calendarPopupBox {
+                background-color: #ffffff;
+                border: 1px solid #000000;
+                position: absolute;
+            }
+
+            .calendarTable {
+                background-color: #ffffff;
+                border: 1px solid #000000;
+            }
+
+            .calendarHeader {
+                background-color: #9900cc;
+                color: #ffffff;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 13px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .calendarSelect {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .calendarDayHeader {
+                background-color: #cccccc;
+                color: #000000;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                font-weight: bold;
+                text-align: center;
+                width: 30px;
+            }
+
+            .calendarDay {
+                background-color: #eeeeee;
+                color: #000000;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+                .calendarDay:hover {
+                    background-color: #cccccc;
+                }
+
+            .calendarButton {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                font-weight: bold;
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <h1>Employee Information Entry</h1>
+        <table class="calendarPopupBox" id="calendarTable" style="display: none;">
+            <tr>
+                <td id="calendar"></td>
+            </tr>
+        </table>
+        <script>
+            var selectedDate = new Date();
+            var selectedMonth = selectedDate.getMonth() + 1;
+            var selectedYear = selectedDate.getFullYear();
+            var currYear = selectedYear;
+            var dateElement;
+            var calendarElement = document.getElementById('calendar');
+            var calendarTableElement = document.getElementById('calendarTable');
+            var calendarHTML = '';
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            function calendarHeader(month, year) {
+                return '<table class="calendarTable">'
+                    + '<tr>'
+                    + '<td colspan="2" class="calendarHeader">'
+                    + '<select class="calendarSelect" onchange="selectMonth(this.value);">'
+                    + '<option value="1">January</option>'
+                    + '<option value="2">February</option>'
+                    + '<option value="3">March</option>'
+                    + '<option value="4">April</option>'
+                    + '<option value="5">May</option>'
+                    + '<option value="6">June</option>'
+                    + '<option value="7">July</option>'
+                    + '<option value="8">August</option>'
+                    + '<option value="9">September</option>'
+                    + '<option value="10">October</option>'
+                    + '<option value="11">November</option>'
+                    + '<option value="12">December</option>'
+                    + '</select>'
+                    + '</td>'
+                    + '<td class="calendarHeader" style="cursor:pointer" onclick="prevMonth();">&#9668;</td>'
+                    + '<td class="calendarHeader"></td>'
+                    + '<td class="calendarHeader" style="cursor:pointer" onclick="nextMonth();">&#9658;</td>'
+                    + '<td colspan="2" class="calendarHeader">'
+                    + '<select class="calendarSelect" onchange="selectYear(this.value);">'
+                    + '<option>' + (currYear - 1) + '</option>'
+                    + '<option>' + currYear + '</option>'
+                    + '<option>' + (currYear + 1) + '</option>'
+                    + '<option>' + (currYear + 2) + '</option>'
+                    + '<option>' + (currYear + 3) + '</option>'
+                    + '<option>' + (currYear + 4) + '</option>'
+                    + '<option>' + (currYear + 5) + '</option>'
+                    + '</select>'
+                    + '</td>'
+                    + '</tr>'
+                    + '<tr>'
+                    + '<td colspan="7" class="calendarHeader">' + months[month - 1] + ' ' + year + '</td>'
+                    + '</tr>'
+                    + '<tr>'
+                    + '<td class="calendarDayHeader">Sun</td>'
+                    + '<td class="calendarDayHeader">Mon</td>'
+                    + '<td class="calendarDayHeader">Tue</td>'
+                    + '<td class="calendarDayHeader">Wed</td>'
+                    + '<td class="calendarDayHeader">Thu</td>'
+                    + '<td class="calendarDayHeader">Fri</td>'
+                    + '<td class="calendarDayHeader">Sat</td>'
+                    + '</tr>';
+            }
+            function createCalendar(month, year) {
+                calendarHTML = '';
+                calendarHTML += calendarHeader(month, year);
+                var calendarDate = new Date();
+                calendarDate.setMonth(month - 1);
+                calendarDate.setFullYear(year);
+                calendarDate.setDate(1);
+                if (month == 4 || month == 6 || month == 9 || month == 11) {
+                    days = 30;
+                } else if (month == 2) {
+                    days = (year % 4 == 0) ? 29 : 28;
+                } else {
+                    days = 31;
+                }
+                var dayOfWeek = calendarDate.getDay();
+                var firstWeek = true;
+                calendarHTML += '<tr>';
+                if (dayOfWeek != 0) {
+                    calendarHTML += '<td colspan="' + dayOfWeek + '"></td>';
+                }
+                for (var i = 0; i < days; i++) {
+                    if (dayOfWeek == 0 && !firstWeek) {
+                        calendarHTML += '<tr>';
+                    }
+                    calendarHTML += '<td class="calendarDay" onclick="selectDate(' + (i + 1) + ',' + month + ',' + year + ')">' + (i + 1) + '</td>';
+                    if (dayOfWeek == 6) {
+                        dayOfWeek = 0;
+                    } else {
+                        dayOfWeek += 1;
+                    }
+                    if (dayOfWeek == 0) {
+                        calendarHTML += '</tr>';
+                    }
+                    firstWeek = false;
+                }
+                calendarHTML += '<tr>'
+                    + '<td class="calendarHeader" style="cursor:pointer" colspan="7"><input type="button" class="calendarButton" value="Close" onclick="hideCalendar();" /></td>'
+                    + '</tr>';
+                calendarHTML += '</table>';
+                calendarElement.innerHTML = calendarHTML;
+                calendarHTML = '';
+                calendarTableElement.style.display = '';
+            }
+            function formatDate(d, m, y) {
+                if (m < 10) {
+                    m = '0' + m;
+                }
+                if (d < 10) {
+                    d = '0' + d;
+                }
+                return y + '-' + m + '-' + d;
+            }
+            function getLeftPosition(dateField) {
+                var leftPos = dateField.offsetLeft;
+                dateField = dateField.offsetParent;
+                while (dateField) {
+                    leftPos += dateField.offsetLeft;
+                    dateField = dateField.offsetParent;
+                }
+                return leftPos;
+            }
+            function getTopPosition(dateField) {
+                var topPos = dateField.offsetTop;
+                dateField = dateField.offsetParent;
+                while (dateField) {
+                    topPos += dateField.offsetTop;
+                    dateField = dateField.offsetParent;
+                }
+                return topPos;
+            }
+            function hideCalendar() {
+                calendarTableElement.style.display = 'none';
+            }
+            function nextMonth() {
+                selectedMonth += 1;
+                if (selectedMonth > 12) {
+                    selectedMonth = 1;
+                    selectedYear += 1;
+                }
+                createCalendar(selectedMonth, selectedYear);
+            }
+            function prevMonth() {
+                selectedMonth = selectedMonth - 1;
+                if (selectedMonth < 1) {
+                    selectedMonth = 12;
+                    selectedYear = selectedYear - 1;
+                }
+                createCalendar(selectedMonth, selectedYear);
+            }
+            function selectDate(d, m, y) {
+                dateElement.value = formatDate(d, m, y);
+                hideCalendar();
+            }
+            function selectMonth(month) {
+                selectedMonth = month;
+                createCalendar(selectedMonth, selectedYear);
+            }
+            function selectYear(year) {
+                selectedYear = year;
+                createCalendar(selectedMonth, selectedYear);
+            }
+            function showCalendar(dateField) {
+                dateElement = dateField;
+                var currDate = new Date();
+                selectedMonth = currDate.getMonth() + 1;
+                selectedYear = currDate.getFullYear();
+                createCalendar(selectedMonth, selectedYear);
+                calendarTableElement.style.left = getLeftPosition(dateField) + 'px';
+                calendarTableElement.style.top = getTopPosition(dateField) + dateField.offsetHeight + 'px';
+            }
+        </script>
         <form id="form1" runat="server">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.EmployeeId)
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.EmployeeId)
                         </div>
-                    </div>
+                    </div>*@
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.FirstName)
+                            @*@Html.LabelFor(model => model.FirstName)*@
+                            <label for="FirstName">First Name</label>
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.FirstName)
@@ -30,7 +264,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.MiddleName)
+                            @*@Html.LabelFor(model => model.MiddleName)*@
+                            <label for="MiddleName">Middle Name</label>
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.MiddleName)
@@ -38,7 +273,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.LastName)
+                            @*@Html.LabelFor(model => model.LastName)*@
+                            <label for="LastName">Last Name</label>
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.LastName)
@@ -46,22 +282,20 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.BirthDate)
+                            @*@Html.LabelFor(model => model.BirthDate)*@
+                            <label for="BirthDate">Birth Date</label>
+                            @*@Html.EditorFor(model => model.BirthDate)*@
+                            <input type="text" name="BirthDate" size="12" onclick="showCalendar(this);" style="cursor:text" />
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.BirthDate)
+                            @*@Html.LabelFor(model => model.HireDate)*@
+                            <label for="HireDate">Hire Date</label>
+                            @*@Html.EditorFor(model => model.HireDate)*@
+                            <input type="text" name="HireDate" size="12" onclick="showCalendar(this);" style="cursor:text" />
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.HireDate)
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.HireDate)
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.Department)
@@ -72,7 +306,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.JobTitle)
+                            @*@Html.LabelFor(model => model.JobTitle)*@
+                            <label for="JobTitle">Job Title</label>
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.JobTitle)
@@ -88,7 +323,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.SalaryType)
+                            @*@Html.LabelFor(model => model.SalaryType)*@
+                            <label for="SalaryType">Salary Type</label>
                         </div>
                         <div class="col-md-6">
                             @{
@@ -104,22 +340,18 @@
                                     Value = "Hourly",
                                 });
                             }
-
-                            @Html.DropDownListFor(model => model.SalaryType, listItems, "-- Select Salary Type --")
-
-
+                            @Html.DropDownListFor(model => model.SalaryType, listItems, "--- Select Salary Type ---")
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.AvailableHours)
+                            @*@Html.LabelFor(model => model.AvailableHours)*@
+                            <label for="AvailableHours">Available Hours</label>
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.AvailableHours)
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
                     <button class="btn btn-secondary" type="submit">Submit</button>
                     <button class="btn btn-secondary" type="reset">Clear</button>
                 </div>
