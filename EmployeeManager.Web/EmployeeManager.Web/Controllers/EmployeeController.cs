@@ -42,5 +42,41 @@ namespace EmployeeManager.Web.Controllers
 
             return View();
         }
+        public ActionResult Update()
+        {
+            return View();
+        }
+
+        public async Task<JsonResult> UpdateEmployee(UpdateEmployeeModel employee)
+        {
+            if(employee.EmployeeId == Guid.Empty)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
+            var result = await _employeeOrchestrator.UpdateEmployee(new EmployeeViewModel
+            {
+                EmployeeId = employee.EmployeeId,
+                FirstName = employee.FirstName,
+                MiddleName = employee.MiddleName,
+                LastName = employee.LastName,
+                BirthDate = employee.BirthDate,
+                HireDate = employee.HireDate,
+                Department = employee.Department,
+                JobTitle = employee.JobTitle,
+                Salary = employee.Salary,
+                SalaryType = employee.SalaryType,
+                AvailableHours = employee.AvailableHours
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);  
+        }
+
+        public async Task<JsonResult> Search(string searchString)
+        {
+            var viewModel = await _employeeOrchestrator.SearchEmployee(searchString);
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
+        }
     }
 }

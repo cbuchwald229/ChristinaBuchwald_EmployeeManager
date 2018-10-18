@@ -4,9 +4,11 @@ using System.Threading.Tasks;
 
 namespace EmployeeManager.Shared.Orchestrators.Interfaces
 {
-    interface IEmployeeOrchestrator
+    public interface IEmployeeOrchestrator
     {
         Task<List<EmployeeViewModel>> GetAllEmployees();
         Task<int> CreateEmployee(EmployeeViewModel employee);
+        Task<bool> UpdateEmployee(EmployeeViewModel employee);
+        Task<EmployeeViewModel> SearchEmployee(string searchString);
     }
 }
