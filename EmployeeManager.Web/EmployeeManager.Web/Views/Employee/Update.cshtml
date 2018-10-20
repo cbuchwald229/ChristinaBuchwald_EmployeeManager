@@ -4,125 +4,128 @@
 
 <h2>Update Employee</h2>
 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Search Last Name</label>
+        </div>
+        <div class="col-md-7">
+            <input id="searchString" type="text" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-dark" onclick="searchEmployee()">Search</button>
+        </div>
+    </div>
+
+    <hr />
+
+    <div id="successMessage" class="hidden alert alert-success">
+        Successfully Updated!
+    </div>
+    <div id="errorMessage" class="hidden alert alert-danger">
+        Error Occurred!
+    </div>
+
+    <input id="employeeId" type="hidden" />
 <div class="row">
-    <div class="col-md-3">
-        <label>Search Last Name</label>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <label>First Name</label>
+            </div>
+            <div class="col-md-6">
+                <input id="firstName" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Middle Name</label>
+            </div>
+            <div class="col-md-6">
+                <input id="middleName" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Last Name</label>
+            </div>
+            <div class="col-md-6">
+                <input id="lastName" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>Birth Date</label>
+            </div>
+            <div class="col-md-4">
+                <input id="birthDate" type="date" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <label>Hire Date</label>
+            </div>
+            <div class="col-md-4">
+                <input id="hireDate" type="date" class="form-control" />
+            </div>
+        </div>
     </div>
-    <div class="col-md-7">
-        <input id="searchString" type="text" class="form-control" />
-    </div>
-    <div class="col-md-2">
-        <button class="btn btn-dark" onclick="searchEmployee()">Search</button>
-    </div>
-</div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Department</label>
+            </div>
+            <div class="col-md-6">
+                <input id="department" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Job Title</label>
+            </div>
+            <div class="col-md-6">
+                <input id="jobTitle" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <label>Salary</label>
+            </div>
+            <div class="col-md-3">
+                <input id="salary" type="number" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label>Salary Type</label>
+            </div>
+            <div class="col-md-5">
+                @{
+                    List<SelectListItem> listItems = new List<SelectListItem>();
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Annual",
+                        Value = "Annual"
+                    });
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = "Hourly",
+                        Value = "Hourly",
+                    });
+                }
+                @Html.DropDownListFor(model => model.SalaryType, listItems, "--- Select Salary Type ---")
+            </div>
+        </div>
 
-<hr />
+        <div class="row">
+            <div class="col-md-6">
+                <label>Available Hours</label>
+            </div>
+            <div class="col-md-6">
+                <input id="availableHours" type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
 
-<div id="successMessage" class="hidden alert alert-success">
-    Successfully Updated!
-</div>
-<div id="errorMessage" class="hidden alert alert-danger">
-    Error Occurred!
-</div>
 
-<input id="employeeId" type="hidden" />
-
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>First Name</label>
-    </div>
-    <div class="col-md-6">
-        <input id="firstName" type="text" class="form-control" />
+    <div class="col-md-12">
+        <button class="btn btn-secondary margin-top-md margin-left-md" onclick="updateEmployee()">Save</button>
+        <button class="btn btn-secondary margin-top-md margin-left-md" type="reset">Clear</button>
     </div>
 </div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>Middle Name</label>
-    </div>
-    <div class="col-md-6">
-        <input id="middleName" type="text" class="form-control" />
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>Last Name</label>
-    </div>
-    <div class="col-md-6">
-        <input id="lastName" type="text" class="form-control" />
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>Birth Date</label>
-    </div>
-    <div class="col-md-6">
-        <input id="birthDate" type="date" class="form-control" />
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>Hire Date</label>
-    </div>
-    <div class="col-md-6">
-        <input id="hireDate" type="date" class="form-control" />
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>Department</label>
-    </div>
-    <div class="col-md-6">
-        <input id="department" type="text" class="form-control" />
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>Job Title</label>
-    </div>
-    <div class="col-md-6">
-        <input id="jobTitle" type="text" class="form-control" />
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>Salary</label>
-    </div>
-    <div class="col-md-6">
-        <input id="salary" type="number" class="form-control" />
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>Salary Type</label>
-    </div>
-    <div class="col-md-6">
-        @{
-            List<SelectListItem> listItems = new List<SelectListItem>();
-            listItems.Add(new SelectListItem
-            {
-                Text = "Annual",
-                Value = "Annual"
-            });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Hourly",
-                Value = "Hourly",
-            });
-        }
-        @Html.DropDownListFor(model => model.SalaryType, listItems, "--- Select Salary Type ---")
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <label>Available Hours</label>
-    </div>
-    <div class="col-md-6">
-        <input id="availableHours" type="text" class="form-control" />
-    </div>
-</div>
-
-<div class="col-md-12">
-    <button class="btn btn-secondary margin-top-md margin-left-md" onclick="updateEmployee()">Save</button>
-    <button class="btn btn-secondary margin-top-md margin-left-md" type="reset">Clear</button>
-</div>
-

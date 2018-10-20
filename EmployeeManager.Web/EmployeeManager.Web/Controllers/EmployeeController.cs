@@ -1,4 +1,5 @@
 ﻿using EmployeeManager.Shared.Orchestrators;
+using EmployeeManager.Shared.Orchestrators.Interfaces;
 using EmployeeManager.Shared.ViewModels;
 using EmployeeManager.Web.Models;
 using System;
@@ -9,7 +10,12 @@ namespace EmployeeManager.Web.Controllers
 {
     public class EmployeeController : Controller
     {
-        private EmployeeOrchestrator _employeeOrchestrator = new EmployeeOrchestrator();
+        private readonly IEmployeeOrchestrator _employeeOrchestrator;
+
+        public EmployeeController(IEmployeeOrchestrator employeeOrchestrator)
+        {
+            _employeeOrchestrator = employeeOrchestrator;
+        }
         // GET: Employee
         public async Task<ActionResult> Index()
         {
