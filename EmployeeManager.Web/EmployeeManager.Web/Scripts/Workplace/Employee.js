@@ -9,7 +9,10 @@
         $("#firstName").val(data.FirstName);
         $("#middleName").val(data.MiddleName);
         $("#lastName").val(data.LastName);
-        $("#birthDate").val(data.BirthDate);
+        var birthdateString = data.BirthDate.substring(6, 18);
+        var birthdateInt = parseInt(birthdateString);
+        var birthdate = new Date(birthdateInt);
+        $("#birthDate").val(birthdate);
         $("#hireDate").val(data.HireDate);
         $("#department").val(data.Department);
         $("#jobTitle").val(data.JobTitle);

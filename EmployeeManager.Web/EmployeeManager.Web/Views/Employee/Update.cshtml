@@ -58,7 +58,7 @@
                 <label>Birth Date</label>
             </div>
             <div class="col-md-4">
-                <input id="birthDate" type="date" class="form-control" />
+                <input id="birthDate" type="date" class="form-control"/>
             </div>
             <div class="col-md-2">
                 <label>Hire Date</label>
@@ -96,20 +96,7 @@
                 <label>Salary Type</label>
             </div>
             <div class="col-md-5">
-                @{
-                    List<SelectListItem> listItems = new List<SelectListItem>();
-                    listItems.Add(new SelectListItem
-                    {
-                        Text = "Annual",
-                        Value = "Annual"
-                    });
-                    listItems.Add(new SelectListItem
-                    {
-                        Text = "Hourly",
-                        Value = "Hourly",
-                    });
-                }
-                @Html.DropDownListFor(model => model.SalaryType, listItems, "--- Select Salary Type ---")
+                @Html.EnumDropDownListFor(model => model.SalaryType, "Select a salary type", new { @class = "form-control" })
             </div>
         </div>
 

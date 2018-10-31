@@ -1,5 +1,4 @@
-﻿using EmployeeManager.Shared.Orchestrators;
-using EmployeeManager.Shared.Orchestrators.Interfaces;
+﻿using EmployeeManager.Shared.Orchestrators.Interfaces;
 using EmployeeManager.Shared.ViewModels;
 using EmployeeManager.Web.Models;
 using System;
@@ -83,6 +82,15 @@ namespace EmployeeManager.Web.Controllers
             var viewModel = await _employeeOrchestrator.SearchEmployee(searchString);
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> Anniversaries()
+        {
+            var employeeDisplayModel = new EmployeeDisplayModel
+            {
+                Employees = await _employeeOrchestrator.GetAllEmployees()
+            };
+            return View(employeeDisplayModel);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using EmployeeManager.Shared.Orchestrators;
+﻿using EmployeeManager.Shared.Orchestrators.Interfaces;
 using EmployeeManager.Shared.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,11 +9,11 @@ namespace EmployeeManager.Api.Controllers
     [Route("api/v1/employees")]
     public class EmployeeController : ApiController
     {
-        private EmployeeOrchestrator _employeeOrchestrator;
+        private readonly IEmployeeOrchestrator _employeeOrchestrator;
 
-        public EmployeeController()
+        public EmployeeController(IEmployeeOrchestrator employeeOrchestrator)
         {
-            _employeeOrchestrator = new EmployeeOrchestrator();
+            _employeeOrchestrator = employeeOrchestrator;
         }
 
         public async Task<List<EmployeeViewModel>> GetAllEmployees()
