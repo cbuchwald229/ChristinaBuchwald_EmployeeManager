@@ -12,17 +12,12 @@ namespace EmployeeManager.Shared.Services
         {
             _dateTimeService = dateTimeService;
         }
-        public bool isTodayYourAnniversary(EmployeeViewModel employee)
+        public bool isTodayYourAnniversary(DateTime dateToEvaluate)
         {
-            return employee.HireDate.DayOfYear == _dateTimeService.Now().DayOfYear;
+            return dateToEvaluate.DayOfYear == _dateTimeService.Now().DayOfYear;
         }
 
-        public bool isTodayYourBirthday(EmployeeViewModel employee)
-        {
-            return employee.BirthDate.DayOfYear == _dateTimeService.Now().DayOfYear;
-        }
-
-        public int fullYearsFromDate(EmployeeViewModel employee, DateTime dateToEvaluate)
+        public int fullYearsFromDate(DateTime dateToEvaluate)
         {
             int yearsFromDate = _dateTimeService.Now().Year - dateToEvaluate.Year;
             if (_dateTimeService.Now().DayOfYear < dateToEvaluate.DayOfYear)

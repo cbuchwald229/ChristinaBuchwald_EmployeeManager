@@ -5,8 +5,7 @@ namespace EmployeeManager.Shared.Services.Interfaces
 {
     public interface IDateOfCelecrationService
     {
-        bool isTodayYourAnniversary(EmployeeViewModel employee);
-        bool isTodayYourBirthday(EmployeeViewModel employee);
-        int fullYearsFromDate(EmployeeViewModel employee, DateTime dateToEvaluate);
+        bool isTodayYourAnniversary(DateTime dateToEvaluate);
+        int fullYearsFromDate(DateTime dateToEvaluate);
     }
 }

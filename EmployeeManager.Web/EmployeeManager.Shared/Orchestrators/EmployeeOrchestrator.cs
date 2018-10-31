@@ -2,6 +2,7 @@
 using EmployeeManager.Domain.Entities;
 using EmployeeManager.Shared.Orchestrators.Interfaces;
 using EmployeeManager.Shared.ViewModels;
+using EmployeeManager.Shared.Services;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -116,17 +117,11 @@ namespace EmployeeManager.Shared.Orchestrators
         {
             var employees = await _employeeContext.Employees.Select(x => new EmployeeViewModel
             {
-                EmployeeId = x.EmployeeId,
                 FirstName = x.FirstName,
-                MiddleName = x.MiddleName,
                 LastName = x.LastName,
-                BirthDate = x.BirthDate,
-                HireDate = x.HireDate,
                 Department = x.Department,
-                JobTitle = x.JobTitle,
-                Salary = x.Salary,
-                SalaryType = x.SalaryType,
-                AvailableHours = x.AvailableHours
+                //YearsOfEmployment = fullYearsFromDate(x.HireDate),
+                //Anniversary = isTodayYourAnniversary(x.HireDate)
 
             }).ToListAsync();
 

@@ -20,5 +20,9 @@ namespace EmployeeManager.Shared.ViewModels
         public SalaryType SalaryType { get; set; }
         public string SalaryTypeString => SalaryType.ToString();
         public string AvailableHours { get; set; }
+        public int YearsOfEmployment { get; set; }
+        public string YearsOfEmploymentString => YearsOfEmployment.ToString();
+        public bool Anniversary { get; set; }
+        public string AnniversaryString => Anniversary.ToString();
     }
 }
