@@ -9,11 +9,8 @@
         $("#firstName").val(data.FirstName);
         $("#middleName").val(data.MiddleName);
         $("#lastName").val(data.LastName);
-        var birthdateString = data.BirthDate.substring(6, 18);
-        var birthdateInt = parseInt(birthdateString);
-        var birthdate = new Date(birthdateInt);
-        $("#birthDate").val(birthdate);
-        $("#hireDate").val(data.HireDate);
+        $("#birthDate").val(JsonDateToIsoDate(data.BirthDate));
+        $("#hireDate").val(JsonDateToIsoDate(data.HireDate));
         $("#department").val(data.Department);
         $("#jobTitle").val(data.JobTitle);
         $("#salary").val(data.Salary);
@@ -60,4 +57,8 @@ function updateEmployee() {
                 .addClass("visible");
         }
     });
+}
+
+function JsonDateToIsoDate(date) {
+    return new Date(parseInt(date.replace('/Date(', ''))).toISOString().substr(0, 10);
 }
