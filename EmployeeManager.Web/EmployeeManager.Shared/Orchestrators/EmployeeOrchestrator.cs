@@ -7,16 +7,19 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeManager.Shared.Services.Interfaces;
 
 namespace EmployeeManager.Shared.Orchestrators
 {
     public class EmployeeOrchestrator : IEmployeeOrchestrator
     {
         private EmployeeContext _employeeContext;
+        private readonly IDateOfCelebrationService _dateOfCelebrationService;
 
-        public EmployeeOrchestrator()
+        public EmployeeOrchestrator(IDateOfCelebrationService dateOfCelebrationService)
         {
             _employeeContext = new EmployeeContext();
+            _dateOfCelebrationService = dateOfCelebrationService;
         }
 
         public async Task<int> CreateEmployee(EmployeeViewModel employee)
@@ -120,8 +123,8 @@ namespace EmployeeManager.Shared.Orchestrators
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Department = x.Department,
-                //YearsOfEmployment = fullYearsFromDate(x.HireDate),
-                //Anniversary = isTodayYourAnniversary(x.HireDate)
+                YearsOfEmployment = _dateOfCelebrationService.FullYearsFromDate(x.HireDate),
+                Anniversary = _dateOfCelebrationService.IsTodayYourAnniversary(x.HireDate)
 
             }).ToListAsync();
 

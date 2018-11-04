@@ -1,5 +1,6 @@
 ﻿using EmployeeManager.Domain.Entities;
 using System;
+using EmployeeManager.Shared.Services;
 
 namespace EmployeeManager.Shared.ViewModels
 {

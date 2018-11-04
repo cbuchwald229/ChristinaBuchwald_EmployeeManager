@@ -27,7 +27,7 @@ namespace EmployeeManager.Test
 
             var dateOfCelebrationService = _mocker.Create<DateOfCelebrationService>();
 
-            var isHireDay = dateOfCelebrationService.isTodayYourAnniversary(new DateTime(2015, 12, 03));
+            var isHireDay = dateOfCelebrationService.IsTodayYourAnniversary(new DateTime(2015, 12, 03));
 
             Assert.IsTrue(isHireDay);
         }
@@ -39,7 +39,7 @@ namespace EmployeeManager.Test
 
             var dateOfCelebrationService = _mocker.Create<DateOfCelebrationService>();
 
-            var isHireDay = dateOfCelebrationService.isTodayYourAnniversary(new DateTime(2015, 10, 15));
+            var isHireDay = dateOfCelebrationService.IsTodayYourAnniversary(new DateTime(2015, 10, 15));
 
             Assert.IsFalse(isHireDay);
         }
@@ -51,7 +51,7 @@ namespace EmployeeManager.Test
 
             var dateOfCelebrationService = _mocker.Create<DateOfCelebrationService>();
 
-            var isBirthDay = dateOfCelebrationService.isTodayYourAnniversary(new DateTime(1985, 12, 03));
+            var isBirthDay = dateOfCelebrationService.IsTodayYourAnniversary(new DateTime(1985, 12, 03));
 
             Assert.IsTrue(isBirthDay);
         }
@@ -63,7 +63,7 @@ namespace EmployeeManager.Test
 
             var dateOfCelebrationService = _mocker.Create<DateOfCelebrationService>();
 
-            var isBirthDay = dateOfCelebrationService.isTodayYourAnniversary(new DateTime(1985, 10, 13));
+            var isBirthDay = dateOfCelebrationService.IsTodayYourAnniversary(new DateTime(1985, 10, 13));
 
             Assert.IsFalse(isBirthDay);
         }
@@ -75,7 +75,7 @@ namespace EmployeeManager.Test
 
             var dateOfCelebrationService = _mocker.Create<DateOfCelebrationService>();
 
-            int isBirthDay = dateOfCelebrationService.fullYearsFromDate(employee.BirthDate);
+            int isBirthDay = dateOfCelebrationService.FullYearsFromDate(employee.BirthDate);
 
             Assert.IsTrue(33 == isBirthDay);
         }
@@ -87,7 +87,7 @@ namespace EmployeeManager.Test
 
             var dateOfCelebrationService = _mocker.Create<DateOfCelebrationService>();
 
-            int isBirthDay = dateOfCelebrationService.fullYearsFromDate(employee.BirthDate);
+            int isBirthDay = dateOfCelebrationService.FullYearsFromDate(employee.BirthDate);
 
             
             Assert.IsFalse(33 == isBirthDay);

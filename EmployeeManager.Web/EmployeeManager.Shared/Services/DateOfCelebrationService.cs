@@ -4,7 +4,7 @@ using System;
 
 namespace EmployeeManager.Shared.Services
 {
-    public class DateOfCelebrationService : IDateOfCelecrationService
+    public class DateOfCelebrationService : IDateOfCelebrationService
     {
         private readonly IDateTimeService _dateTimeService;
 
@@ -12,12 +12,12 @@ namespace EmployeeManager.Shared.Services
         {
             _dateTimeService = dateTimeService;
         }
-        public bool isTodayYourAnniversary(DateTime dateToEvaluate)
+        public bool IsTodayYourAnniversary(DateTime dateToEvaluate)
         {
             return dateToEvaluate.DayOfYear == _dateTimeService.Now().DayOfYear;
         }
 
-        public int fullYearsFromDate(DateTime dateToEvaluate)
+        public int FullYearsFromDate(DateTime dateToEvaluate)
         {
             int yearsFromDate = _dateTimeService.Now().Year - dateToEvaluate.Year;
             if (_dateTimeService.Now().DayOfYear < dateToEvaluate.DayOfYear)
