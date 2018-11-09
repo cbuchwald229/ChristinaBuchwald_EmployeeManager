@@ -7,6 +7,8 @@ namespace EmployeeManager.Web.App_Start
     using System.Web;
     using EmployeeManager.Shared.Orchestrators;
     using EmployeeManager.Shared.Orchestrators.Interfaces;
+    using EmployeeManager.Shared.Services;
+    using EmployeeManager.Shared.Services.Interfaces;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -63,6 +65,8 @@ namespace EmployeeManager.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IEmployeeOrchestrator>().To<EmployeeOrchestrator>();
+            kernel.Bind<IDateOfCelebrationService>().To<DateOfCelebrationService>();
+            kernel.Bind<IDateTimeService>().To<DateTimeService>();
         }        
     }
 }
