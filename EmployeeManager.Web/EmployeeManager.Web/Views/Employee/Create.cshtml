@@ -47,10 +47,16 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="BirthDate">Birth Date</label>
-                            <input type="date" name="BirthDate"/>
                         </div>
                         <div class="col-md-6">
+                            <input type="date" name="BirthDate" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <label for="HireDate">Hire Date</label>
+                        </div>
+                        <div class="col-md-6">
                             <input type="date" name="HireDate" />
                         </div>
                     </div>
@@ -75,7 +81,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.Salary)
+                        </div>
+                        <div class="col-md-6">
                             <input type="number" name="Salary" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.SalaryType)
                         </div>
                         <div class="col-md-6">
                             @Html.EnumDropDownListFor(model => model.SalaryType, "Select a salary type", new { @class = "form-control" })
@@ -89,7 +102,7 @@
                             @Html.EditorFor(model => model.AvailableHours)
                         </div>
                     </div>
-                    <button class="btn btn-secondary" type="submit" onsubmit="giveMessage()">Submit</button>
+                    <button class="btn btn-secondary" type="submit" onsubmit="giveMessage()">Create</button>
                     <button class="btn btn-secondary" type="reset">Clear</button>
                 </div>
             </div>
