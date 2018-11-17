@@ -115,20 +115,5 @@ namespace EmployeeManager.Shared.Orchestrators
 
             return true;
         }
-
-        public async Task<List<EmployeeViewModel>> ViewAllEmployeesAnniversaries()
-        {
-            var employees = await _employeeContext.Employees.Select(x => new EmployeeViewModel
-            {
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                Department = x.Department,
-                YearsOfEmployment = _dateOfCelebrationService.FullYearsFromDate(x.HireDate),
-                Anniversary = _dateOfCelebrationService.IsTodayYourAnniversary(x.HireDate)
-
-            }).ToListAsync();
-
-            return employees;
-        }
     }
 }

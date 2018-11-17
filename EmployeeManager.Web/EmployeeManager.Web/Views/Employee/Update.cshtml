@@ -46,24 +46,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <label>Last Name</label>
+             <div class="col-md-6">
+                <label>Middle Name</label>
             </div>
             <div class="col-md-6">
-                <input id="lastName" type="text" class="form-control" />
+                <input id="middleName" type="text" class="form-control" />
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-6">
                 <label>Birth Date</label>
             </div>
-            <div class="col-md-4">
-                <input id="birthDate" type="date" class="form-control"/>
+            <div class="col-md-6">
+                <input id="birthDate" type="date" class="form-control" />
             </div>
-            <div class="col-md-2">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <label>Hire Date</label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <input id="hireDate" type="date" class="form-control" />
             </div>
         </div>
@@ -86,17 +88,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-6">
                 <label>Salary</label>
             </div>
-            <div class="col-md-3">
-                <input id="salary" type="number" class="form-control" />
+            <div class="col-md-6">
+                <input id="salary" type="number" min="0" class="form-control" />
             </div>
-            <div class="col-md-3">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <label>Salary Type</label>
             </div>
-            <div class="col-md-5">
-                @Html.EnumDropDownListFor(model => model.SalaryType, "Select a salary type", new { @class = "form-control" })
+            <div class="col-md-6">
+                @Html.EnumDropDownListFor(model => model.SalaryType, new { @class = "form-control" })
             </div>
         </div>
 
