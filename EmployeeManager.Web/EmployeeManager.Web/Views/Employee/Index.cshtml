@@ -1,4 +1,10 @@
 ﻿@model EmployeeManager.Web.Models.EmployeeDisplayModel
+@{ 
+    if (Session["userId"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
 <!DOCTYPE html>
 
 <html>

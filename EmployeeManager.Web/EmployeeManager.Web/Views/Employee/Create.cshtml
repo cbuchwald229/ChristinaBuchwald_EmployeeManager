@@ -1,111 +1,117 @@
 ﻿@model EmployeeManager.Web.Models.CreateEmployeeModel
 
-    <!DOCTYPE html>
+@{
+    if (Session["userId"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+<!DOCTYPE html>
 
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Create</title>
-        <script>
-            function submitForm() {
-                var frm = document.getElementById("form1");
-                frm.submit();
-                frm.reset();
-                return;
-            }
-        </script>
-    </head>
-    <body>
-        <h1>Employee Information Entry</h1>
-        <form id="form1" runat="server">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="FirstName">First Name</label>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.FirstName)
-                        </div>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <script>
+        function submitForm() {
+            var frm = document.getElementById("form1");
+            frm.submit();
+            frm.reset();
+            return;
+        }
+    </script>
+</head>
+<body>
+    <h1>Employee Information Entry</h1>
+    <form id="form1" runat="server">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="FirstName">First Name</label>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="MiddleName">Middle Name</label>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.MiddleName)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="LastName">Last Name</label>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.LastName)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="BirthDate">Birth Date</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="date" name="BirthDate" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="HireDate">Hire Date</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="date" name="HireDate" />
-                        </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.FirstName)
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.Department)
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.Department)
-                        </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="MiddleName">Middle Name</label>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="JobTitle">Job Title</label>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.JobTitle)
-                        </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.MiddleName)
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.Salary)
-                        </div>
-                        <div class="col-md-6">
-                            <input type="number" name="Salary" />
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="LastName">Last Name</label>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.SalaryType)
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EnumDropDownListFor(model => model.SalaryType, "Select a salary type", new { @class = "form-control" })
-                        </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.LastName)
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="AvailableHours">Available Hours</label>
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.AvailableHours)
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="BirthDate">Birth Date</label>
                     </div>
-                    <button class="btn btn-secondary" type="submit" onsubmit="giveMessage()">Create</button>
-                    <button class="btn btn-secondary" type="reset">Clear</button>
+                    <div class="col-md-6">
+                        <input type="date" name="BirthDate" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="HireDate">Hire Date</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="date" name="HireDate" />
+                    </div>
                 </div>
             </div>
-        </form>
-    </body>
-    </html>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Department)
+                    </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Department)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="JobTitle">Job Title</label>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.JobTitle)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Salary)
+                    </div>
+                    <div class="col-md-6">
+                        <input type="number" name="Salary" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.SalaryType)
+                    </div>
+                    <div class="col-md-6">
+                        @Html.EnumDropDownListFor(model => model.SalaryType, "Select a salary type", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="AvailableHours">Available Hours</label>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.AvailableHours)
+                    </div>
+                </div>
+                <button class="btn btn-secondary" type="submit" onsubmit="giveMessage()">Create</button>
+                <button class="btn btn-secondary" type="reset">Clear</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
