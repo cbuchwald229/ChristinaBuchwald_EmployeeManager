@@ -16,6 +16,7 @@ namespace EmployeeManager.Web.Controllers
             _employeeOrchestrator = employeeOrchestrator;
         }
         // GET: Employee
+        [HandleError]
         public async Task<ActionResult> Index()
         {
             var employeeDisplayModel = new EmployeeDisplayModel
@@ -24,7 +25,7 @@ namespace EmployeeManager.Web.Controllers
             };
             return View(employeeDisplayModel);
         }
-
+        [HandleError]
         public async Task<ActionResult> Create(CreateEmployeeModel employee)
         {
             if (string.IsNullOrWhiteSpace(employee.FirstName))
@@ -47,11 +48,12 @@ namespace EmployeeManager.Web.Controllers
 
             return View();
         }
+        [HandleError]
         public ActionResult Update()
         {
             return View();
         }
-
+        [HandleError]
         public async Task<JsonResult> UpdateEmployee(UpdateEmployeeModel employee)
         {
             if(employee.EmployeeId == Guid.Empty)
@@ -76,14 +78,14 @@ namespace EmployeeManager.Web.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);  
         }
-
+        [HandleError]
         public async Task<JsonResult> Search(string searchString)
         {
             var viewModel = await _employeeOrchestrator.SearchEmployee(searchString);
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
-
+        [HandleError]
         public async Task<ActionResult> Anniversaries()
         {
             var employeeDisplayModel = new EmployeeDisplayModel

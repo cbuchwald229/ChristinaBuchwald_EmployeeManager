@@ -4,7 +4,9 @@ namespace EmployeeManager.Web.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+
+        // GET: /Home/  
+        [HandleError]
         public ActionResult Index()
         {
             return View();

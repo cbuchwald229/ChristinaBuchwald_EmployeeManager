@@ -14,6 +14,7 @@ namespace EmployeeManager.Web.Controllers
         {
             return View();
         }
+        [HandleError]
         [HttpPost]
         public ActionResult Authorize(EmployeeManager.Web.Models.User userModel)
         {
@@ -43,20 +44,20 @@ namespace EmployeeManager.Web.Controllers
                 }
             }
         }
-
+        [HandleError]
         public ActionResult LogOut()
         {
             int userId = (int)Session["userId"];
             Session.Abandon();
             return RedirectToAction("Index", "Login");
         }
-
+        [HandleError]
         public ActionResult Login()
         {
             return View();
         }
 
-
+        [HandleError]
         public string EncryptString(string encryptString)
         {
             string EncryptionKey = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -80,7 +81,7 @@ namespace EmployeeManager.Web.Controllers
             }
             return encryptString;
         }
-
+        [HandleError]
         public string Decrypt(string cipherText)
         {
             string EncryptionKey = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
