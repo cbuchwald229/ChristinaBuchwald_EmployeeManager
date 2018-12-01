@@ -84,6 +84,7 @@
     <Compile Include="Services\Interfaces\IDateOfCelebrationService.cs" />
     <Compile Include="Services\Interfaces\IDateTimeService.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\LogEntryModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

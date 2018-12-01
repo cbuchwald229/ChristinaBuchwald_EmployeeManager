@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="EmployeeContext.cs" />
     <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\Logging.cs" />
     <Compile Include="Migrations\201810062334597_InitialDatabaseCreationWithEmployees.cs" />
     <Compile Include="Migrations\201810062334597_InitialDatabaseCreationWithEmployees.Designer.cs">
       <DependentUpon>201810062334597_InitialDatabaseCreationWithEmployees.cs</DependentUpon>
@@ -85,6 +86,10 @@
     <Compile Include="Migrations\201810062358577_UpdateDatabaseEnum.cs" />
     <Compile Include="Migrations\201810062358577_UpdateDatabaseEnum.Designer.cs">
       <DependentUpon>201810062358577_UpdateDatabaseEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812012004093_LoggingTable.cs" />
+    <Compile Include="Migrations\201812012004093_LoggingTable.Designer.cs">
+      <DependentUpon>201812012004093_LoggingTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810062358577_UpdateDatabaseEnum.resx">
       <DependentUpon>201810062358577_UpdateDatabaseEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812012004093_LoggingTable.resx">
+      <DependentUpon>201812012004093_LoggingTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

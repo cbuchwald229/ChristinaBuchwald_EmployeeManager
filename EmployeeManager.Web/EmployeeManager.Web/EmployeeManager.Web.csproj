@@ -199,6 +199,7 @@
     </Compile>
     <Compile Include="Models\CreateEmployeeModel.cs" />
     <Compile Include="Models\EmployeeDisplayModel.cs" />
+    <Compile Include="Models\ErrorHandlingModel.cs" />
     <Compile Include="Models\LoginDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

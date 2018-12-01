@@ -115,5 +115,18 @@ namespace EmployeeManager.Shared.Orchestrators
 
             return true;
         }
+
+        public async Task<int> CreateLogEntry(LogEntryModel error)
+        {
+            _employeeContext.Errors.Add(new Logging
+            {
+                LoggingId = error.LoggingId,
+                ErrorDateTime = error.ErrorDateTime,
+                ErrorMessage = error.ErrorMessage,
+                StackTrace = error.StackTrace
+            });
+
+            return await _employeeContext.SaveChangesAsync();
+        }
     }
 }
