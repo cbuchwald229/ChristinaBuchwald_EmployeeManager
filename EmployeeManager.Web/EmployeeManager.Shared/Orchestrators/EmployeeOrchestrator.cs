@@ -128,5 +128,42 @@ namespace EmployeeManager.Shared.Orchestrators
 
             return await _employeeContext.SaveChangesAsync();
         }
+
+        public async Task<List<EmployeeViewModel>> GetEmployeesAndNames()
+        {
+            var employees = await _employeeContext.Employees.Select(x => new EmployeeViewModel
+            {
+                EmployeeId = x.EmployeeId,
+                FirstName = x.FirstName,
+                MiddleName = x.MiddleName,
+                LastName = x.LastName
+
+            }).ToListAsync();
+
+            return employees;
+        }
+
+        public async Task<EmployeeViewModel> SearchEmployeeById(string searchIdString)
+        {
+            var employee = await _employeeContext.Employees
+                .Where(x => x.EmployeeId.Equals(searchIdString))
+                .FirstOrDefaultAsync();
+
+            if (employee == null)
+            {
+                return new EmployeeViewModel();
+            }
+
+            var viewModel = new EmployeeViewModel
+            {
+                FirstName = employee.FirstName,
+                MiddleName = employee.MiddleName,
+                LastName = employee.LastName,
+                BirthDate = employee.BirthDate,
+                Department = employee.Department
+            };
+
+            return viewModel;
+        }
     }
 }

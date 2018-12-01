@@ -22,5 +22,19 @@ namespace EmployeeManager.Api.Controllers
 
             return employees;
         }
+
+        public async Task<List<EmployeeViewModel>> GetEmployeesAndNames()
+        {
+            var employees = await _employeeOrchestrator.GetEmployeesAndNames();
+
+            return employees;
+        }
+
+        public async Task<EmployeeViewModel> SearchEmployeeById(string searchIdString)
+        {
+            var employee = await _employeeOrchestrator.SearchEmployeeById(searchIdString);
+
+            return employee;
+        }
     }
 }
