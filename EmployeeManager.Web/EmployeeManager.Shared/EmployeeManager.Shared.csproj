@@ -77,7 +77,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orchestrators\EmployeeOrchestrator.cs" />
+    <Compile Include="Orchestrators\ErrorOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IEmployeeOrchestrator.cs" />
+    <Compile Include="Orchestrators\Interfaces\IErrorOrchestrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DateOfCelebrationService.cs" />
     <Compile Include="Services\DateTimeService.cs" />
