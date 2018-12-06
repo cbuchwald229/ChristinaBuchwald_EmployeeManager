@@ -22,6 +22,12 @@ namespace EmployeeManager.Shared.Orchestrators
             _dateOfCelebrationService = dateOfCelebrationService;
         }
 
+
+        public EmployeeOrchestrator()
+        {
+            _employeeContext = new EmployeeContext();
+        }
+
         public async Task<int> CreateEmployee(EmployeeViewModel employee)
         {
             _employeeContext.Employees.Add(new Employee
@@ -139,14 +145,14 @@ namespace EmployeeManager.Shared.Orchestrators
                 LastName = x.LastName
 
             }).ToListAsync();
-
+      
             return employees;
         }
 
         public async Task<EmployeeViewModel> SearchEmployeeById(string searchIdString)
         {
             var employee = await _employeeContext.Employees
-                .Where(x => x.EmployeeId.Equals(searchIdString))
+                .Where(x => x.EmployeeId.ToString() == searchIdString)
                 .FirstOrDefaultAsync();
 
             if (employee == null)
